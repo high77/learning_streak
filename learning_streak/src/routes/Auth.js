@@ -5,6 +5,7 @@ import { useState } from "react";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const onChange = (event) => {
     const {
@@ -24,7 +25,7 @@ const Auth = () => {
       data = await signInWithEmailAndPassword(authService, email, password);
       console.log(data);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
 
@@ -48,6 +49,7 @@ const Auth = () => {
           onChange={onChange}
         />
         <input type="submit" value="Log In" />
+        {error}
       </form>
       <div>
         <button>Continue with Google</button>
