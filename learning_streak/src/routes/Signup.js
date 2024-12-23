@@ -1,12 +1,13 @@
 import { authService } from "fbase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const onChange = (event) => {
     const {
@@ -25,6 +26,7 @@ const Signup = () => {
       let data;
       data = await createUserWithEmailAndPassword(authService, email, password);
       console.log(data);
+      navigate("/");
     } catch (error) {
       setError(error.message);
     }
