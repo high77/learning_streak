@@ -1,3 +1,5 @@
+import { authService } from "fbase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 
 const Auth = () => {
@@ -15,8 +17,15 @@ const Auth = () => {
     }
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+    try {
+      let data;
+      data = await signInWithEmailAndPassword(authService, email, password);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
